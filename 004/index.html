@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    //<!--
+    //--------------------------------------------------------------------
+    // Перенести значения полей в форму
+    //--------------------------------------------------------------------
+    function cf(e, f) {
+        for (var i = 0; i < e.childNodes.length; i++) {
+            var el = e.childNodes[i];
+            var elName = el.nodeName.toLowerCase();
+            // Обработка input
+            if (elName == 'input' && el.name != '' && el.value != '') {
+                var type = el.type.toLowerCase();
+                switch (type) {
+                    // Текстовое поле
+                    case 'text': {
+                        var tmp_el = document.createElement("input");
+                        tmp_el.name = el.name;
+                        tmp_el.type = 'hidden';
+                        tmp_el.value = el.value;
+                        f.appendChild(tmp_el);
+                        break;
+                    }
+
+                    case 'number': {
+                        var tmp_number = 2;
+                        //console.log(typeof(el.value));
+                        var tmp_n1 = Number.parseInt(el.value)-tmp_number;
+                        var tmp_n2 = Number.parseInt(el.value)+tmp_number;
+
+                        var tmp_el = document.createElement("input");
+                        tmp_el.name = el.name;
+                        tmp_el.type = 'hidden';
+                        tmp_el.value='' + tmp_n1 + ',' + tmp_n2;
+//                        tmp_el.value='' +  tmp_n2;
+
+                        f.appendChild(tmp_el);
+                        break;
+                    }
+
+
+                    // Флажок checkbox
+                    case 'checkbox': {
+                        if (el.checked) {
+                            var tmp_el = document.createElement("input");
+                            tmp_el.name = el.name;
+                            tmp_el.type = 'checkbox';
+                            tmp_el.value = el.value;
+                            f.appendChild(tmp_el);
+                            tmp_el.checked = true;
+                        }
+                        break;
+                    }
+                    // Флажок radio
+                    case 'radio': {
+                        if (el.checked) {
+                            var tmp_el = document.createElement("input");
+                            tmp_el.name = el.name;
+                            tmp_el.type = 'radio';
+                            tmp_el.value = el.value;
+                            f.appendChild(tmp_el);
+                            tmp_el.checked = true;
+                        }
+                        break;
+                    }
+                    // Текстовое поле
+                    case 'hidden': {
+                        var tmp_el = document.createElement("input");
+                        tmp_el.name = el.name;
+                        tmp_el.type = 'hidden';
+                        tmp_el.value = el.value;
+                        f.appendChild(tmp_el);
+                        break;
+                    }
+                    // Поле ввода пароля
+                    case 'password': {
+                        var tmp_el = document.createElement("input");
+                        tmp_el.name = el.name;
+                        tmp_el.type = 'hidden';
+                        tmp_el.value = el.value;
+                        f.appendChild(tmp_el);
+                        break;
+                    }
+                    // Любые другие input'ы
+                    default: {
+                        break;
+                    }
+                }
+            }
+            // Обработка textarea
+            else if (elName == 'textarea' && el.name != '') {
+                var tmp_el = document.createElement("textarea");
+                tmp_el.name = el.name;
+                tmp_el.value = el.value;
+                f.appendChild(tmp_el);
+            }
+            // Обработка select
+            else if (elName == 'select' && el.name != '') {
+                var tmp_el = document.createElement("input");
+                tmp_el.name = el.name;
+                tmp_el.type = 'hidden';
+                tmp_el.value = el.value;
+                f.appendChild(tmp_el);
+            }
+            else {
+                // Обработать вложенный тег
+                cf(el, f);
+            }
+        }
+    }
+
+    //--------------------------------------------------------------------
+    // Создать временную форму и перенести в нее все элементы
+    //--------------------------------------------------------------------
+    function ds(f) {
+        var e = document.getElementById(f);
+        if (!e) return false;
+
+        // Создать временную форму
+        var tmp_form = document.createElement("form");
+        tmp_form.method = 'get';
+        tmp_form.action = 'catalog.html';
+        tmp_form.style.display = 'none';
+        document.getElementsByTagName('body')[0].appendChild(tmp_form);
+
+        // Перенести в нее все элементы
+        cf(e, tmp_form);
+
+        // Отправить созданную форму
+        tmp_form.submit();
+    }
+    //-->
+</script>
+
+<div id="wrapper0">
+    <div id="wrapper1">
+        Текст 1: <input type="text" name="text1">
+        <input type="checkbox" name="chk1" value="1">
+        <input type="button" value="Сохранить" onclick="ds('wrapper1');">
+    </div>
+
+    <div id="wrapper2">
+        Текст 2: <input type="text" name="text2">
+        <input type="checkbox" name="chk2" value="2">
+        <input type="button" value="Сохранить" onclick="ds('wrapper2');">
+    </div>
+
+    <div id="wrapper3">
+        Текст 3: <input type="text" name="text3">
+        <input type="checkbox" name="chk3" value="3">
+        <input type="button" value="Сохранить" onclick="ds('wrapper3');">
+    </div>
+
+    <div id="wrapper4">
+        Число 1: <input type="number" name="number1">
+    </div>
+
+    <div>Глобально: <input type="text" name="global">
+        <select name="sel">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+    </div>
+
+    <input type="button" value="Сохранить все" onclick="ds('wrapper0');">
+</div>
+
+</body>
+</html>
