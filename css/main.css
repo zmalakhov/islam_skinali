@@ -39,6 +39,23 @@ body {
   font-family: 'Proxima Nova Semibold', sans-serif;
 }
 
+.button {
+  border: none;
+  text-transform: uppercase;
+  padding: 25px 45px;
+  background-color: #507fe1;
+  color: #ffffff;
+  font-family: 'Proxima Nova Semibold', sans-serif;
+}
+
+.navbar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background-color: #fff;
+}
+
 .navbar-wrap {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -115,4 +132,23 @@ body {
   display: block;
   font-size: 14px;
   color: #7b7b79;
+}
+
+.hero {
+  background: #f1f1f1 url("../img/hero/hero-bg.jpg") no-repeat center top 80px;
+  background-size: contain;
+  padding-top: 180px;
+  padding-bottom: 270px;
+}
+
+.hero__title {
+  font-size: 30px;
+  margin-bottom: 40px;
+}
+
+.hero__subtitle {
+  display: block;
+  margin-bottom: 67px;
+  font-size: 30px;
+  font-family: 'Proxima Nova Semibold', sans-serif;
 }
