@@ -90,6 +90,44 @@ body {
   text-decoration: none;
 }
 
+.menu {
+  position: fixed;
+  z-index: 0;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  padding: 16px 0;
+  background-color: #507fe1;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  -webkit-transform: translateY(-100%);
+  transform: translateY(-100%);
+}
+
+.menu_active {
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+}
+
+.menu__nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.menu__link {
+  text-decoration: none;
+  font-size: 17px;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
 .menu-button {
   display: -webkit-box;
   display: -ms-flexbox;
